@@ -1,1 +1,2 @@
 export const GET_EPISODES = "GET_EPISODES"
+export const RANDOM_EPISODE = "RANDOM_EPISODE"

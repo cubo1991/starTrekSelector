@@ -1,7 +1,8 @@
-import { GET_EPISODES } from "./constantes";
+import { GET_EPISODES, RANDOM_EPISODE } from "./constantes";
 
 const initialState = {
-  episodes: {}
+  episodes: {},
+  randomEpisode: {}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -11,7 +12,13 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 episodes: action.payload
-            }            
+            }    
+            
+            case RANDOM_EPISODE:
+                return{
+                    ...state,
+                   randomEpisode: action.payload
+                }
             
     
         default:
