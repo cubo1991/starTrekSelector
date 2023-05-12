@@ -2,33 +2,35 @@ import React, { useEffect, useState } from 'react';
 import { Button, ScrollView, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEpisodes, randomEpisode } from '../Redux/actions';
+import { EpisodeListCard } from '../components/EpisodeListCard';
+
 
 export const EpisodesList = () => {
   let dispatch = useDispatch();
   let episodesRedux = useSelector((state) => state.episodes);
   let randomEpisodeValue = useSelector((state) => state.randomEpisode);
+  const [episode, setEpisode] = useState(null);
+
   
-
-  let episodes = episodesRedux?.episodes || [];
-
-  console.log(episodes.length);
-  console.log(episodes[0])
+console.log(episode)
 
   const episodeRandom = () => {
-    if (episodes.length > 0) {
-      let episodeMathRandom = Math.floor(Math.random() * episodes.length);
+    if (episodesRedux.length > 0) {
+      let episodeMathRandom = Math.floor(Math.random() * episodesRedux.length);
       console.log(episodeMathRandom);
       dispatch(randomEpisode(episodeMathRandom));
+      setEpisode(episodesRedux[episodeMathRandom])
     }
   };
 
-  if (episodes.length === 0) {
+  if (randomEpisodeValue.length === 0) {
     return null; // No renderizar nada si episodes está vacío
   }
 
   return (
     <View>
       <ScrollView>
+        <EpisodeListCard props={episode} />
         <Button title="Engage" onPress={() => episodeRandom()}></Button>
       </ScrollView>
     </View>
