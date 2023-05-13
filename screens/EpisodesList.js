@@ -3,6 +3,8 @@ import { Button, ScrollView, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEpisodes, randomEpisode } from '../Redux/actions';
 import { EpisodeListCard } from '../components/EpisodeListCard';
+import { SeasonSelect } from '../components/SeasonSelect';
+
 
 
 export const EpisodesList = () => {
@@ -30,7 +32,9 @@ export const EpisodesList = () => {
 console.log(episode)
   return (
     <View>
+      
       <ScrollView>
+      <SeasonSelect/>
        {episode ? <EpisodeListCard title={episode.title} episodeNumber={episode.episodeNumber} airDate={episode.usAirDate} series={episode.series.title} season={episode.season.title} /> : <Text>Press to boldly go where no onehas gone before</Text>}
         <Button title="Engage" onPress={() => episodeRandom()}></Button>
       </ScrollView>
