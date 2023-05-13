@@ -5,9 +5,11 @@ import Store from './Redux/store.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { EpisodesList } from './screens/EpisodesList.js';
+import { Home } from './screens/Home.js';
 import { getEpisodes, getEpisodesCache } from './Redux/actions.js';
 import { useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 const Stack = createStackNavigator()
@@ -33,11 +35,12 @@ const MyStack= () => {
 
 
 
-  
+
   return(
 
 <Stack.Navigator>
-<Stack.Screen name="EpisodesList" component={EpisodesList} />
+<Stack.Screen name="Home" component={Home} />
+<Stack.Screen name="Episode" component={EpisodesList} />
 </Stack.Navigator>
 )
   

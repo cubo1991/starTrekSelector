@@ -12,7 +12,7 @@ export const EpisodesList = () => {
   const [episode, setEpisode] = useState(null);
 
   
-console.log(episode)
+
 
   const episodeRandom = () => {
     if (episodesRedux.length > 0) {
@@ -27,10 +27,11 @@ console.log(episode)
     return null; // No renderizar nada si episodes está vacío
   }
 
+console.log(episode)
   return (
     <View>
       <ScrollView>
-        <EpisodeListCard props={episode} />
+       {episode ? <EpisodeListCard title={episode.title} episodeNumber={episode.episodeNumber} airDate={episode.usAirDate} series={episode.series.title} season={episode.season.title} /> : <Text>Press to boldly go where no onehas gone before</Text>}
         <Button title="Engage" onPress={() => episodeRandom()}></Button>
       </ScrollView>
     </View>
