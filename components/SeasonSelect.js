@@ -1,18 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Picker} from '@react-native-picker/picker';
+import { episodeSeason } from '../Redux/actions';
+import { useDispatch } from 'react-redux';
 
 
 export const SeasonSelect = () => {
     const [selectedSeason, setselectedSeason] = useState();
+let dispatch = useDispatch()
 
-   console.log(selectedSeason)
+useEffect(() => {
+  if(selectedSeason){
+  dispatch(episodeSeason(selectedSeason))}
+}, [selectedSeason]);
   return (
  <Picker
   selectedValue={selectedSeason}
   onValueChange={(itemValue, itemIndex) =>
-    setselectedSeason(itemValue)
+   [ setselectedSeason(itemValue),
+   ]
   }>
-    <Picker.Item label="All" value="null" />
+    <Picker.Item label="All" value="all" />
   <Picker.Item label="The Original Serie" value="SEMA0000097474" />
   <Picker.Item label="The Animated Series" value="SEMA0000034504" />
   <Picker.Item label="The Next Generation" value="SEMA0000062876" />  

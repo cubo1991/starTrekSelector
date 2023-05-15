@@ -10,26 +10,32 @@ import { SeasonSelect } from '../components/SeasonSelect';
 export const EpisodesList = () => {
   let dispatch = useDispatch();
   let episodesRedux = useSelector((state) => state.episodes);
+  let episodeFiltered = useSelector((state) => state.filteredEpisodes)
   let randomEpisodeValue = useSelector((state) => state.randomEpisode);
+  let season = useSelector((state) => state.season)
   const [episode, setEpisode] = useState(null);
 
   
 
 
   const episodeRandom = () => {
-    if (episodesRedux.length > 0) {
-      let episodeMathRandom = Math.floor(Math.random() * episodesRedux.length);
-      console.log(episodeMathRandom);
+    if (episodesRedux.length > 0 && season === 'all') {
+      let episodeMathRandom = Math.floor(Math.random() * episodesRedux.length);   
       dispatch(randomEpisode(episodeMathRandom));
       setEpisode(episodesRedux[episodeMathRandom])
-    }
+    } 
+    if (episodeFiltered.length > 0) {
+      let episodeMathRandom = Math.floor(Math.random() * episodeFiltered.length);    
+      dispatch(randomEpisode(episodeMathRandom));
+      setEpisode(episodeFiltered[episodeMathRandom])
+    } 
   };
 
   if (randomEpisodeValue.length === 0) {
     return null; // No renderizar nada si episodes está vacío
   }
 
-console.log(episode)
+
   return (
     <View>
       

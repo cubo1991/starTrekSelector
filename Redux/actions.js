@@ -1,6 +1,6 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { GET_EPISODES, GET_EPISODES_CACHE, RANDOM_EPISODE } from './constantes';
+import { EPISODE_SEASON, GET_EPISODES, GET_EPISODES_CACHE, RANDOM_EPISODE } from './constantes';
 const save =  async (value) => {
   try {
     const jsonValue = JSON.stringify(value)
@@ -79,4 +79,17 @@ export const getEpisodes = () => {
     };
 
   }
+  
+  export const episodeSeason = (payload) => {
+ 
+    return {
+
+      type: EPISODE_SEASON,
+      payload
+    }
+
+  }
+
+
+  
   
