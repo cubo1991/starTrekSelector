@@ -19,7 +19,7 @@ const MyStack= () => {
   useEffect(() => {
     const checkLocalStorage = async () => {
       try {
-        const storedEpisodes = await AsyncStorage.getItem('@storage_Key');
+        const storedEpisodes = await AsyncStorage.getItem('list');
         if (storedEpisodes !== null) {
           dispatch(getEpisodesCache());
         } else {

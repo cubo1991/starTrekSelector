@@ -30,7 +30,7 @@ const initialState = {
             ...state,
             episodes: action.payload
         }
-        case EPISODE_SEASON:
+    case EPISODE_SEASON:
           let id = action.payload
           let toFilter = state.episodes  
           let seasonEpisodes;
