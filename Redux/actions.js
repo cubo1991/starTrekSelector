@@ -15,18 +15,19 @@ const save =  async (value) => {
   }
 }
 
-const load = async () => {
+
+const loadList = async () => {
   try {
-    const jsonValue = await AsyncStorage.getItem('@storage_Key')
+    const jsonValue = await AsyncStorage.getItem('list')
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch(e) {
     console.log(e)
   }
 }
 
-const loadList = async () => {
+const loadSeries = async () => {
   try {
-    const jsonValue = await AsyncStorage.getItem('list')
+    const jsonValue = await AsyncStorage.getItem('series')
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch(e) {
     console.log(e)
@@ -89,10 +90,13 @@ export const getEpisodes = () => {
     return async (dispatch) => {
       try {
        let showEpisodes = await loadList()
+       let seriesInfo = await loadSeries()
+
        
         dispatch({
           type: GET_EPISODES_CACHE,
           payload: showEpisodes,
+          series: seriesInfo
         });
       } catch (error) {
         dispatch({

@@ -6,7 +6,8 @@ const initialState = {
     episodes: [],
     randomEpisode: {},
     filteredEpisodes: [],
-    season: 'all'
+    season: 'all',
+    series: []
     
   };
   
@@ -19,7 +20,7 @@ const initialState = {
         };
   
       case RANDOM_EPISODE:
-  
+
         return {
           ...state,
           randomEpisode: action.payload,
@@ -28,7 +29,8 @@ const initialState = {
      
         return{
             ...state,
-            episodes: action.payload
+            episodes: action.payload,
+            series: action.series
         }
     case EPISODE_SEASON:
           let id = action.payload
