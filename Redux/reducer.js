@@ -7,7 +7,8 @@ const initialState = {
     randomEpisode: {},
     filteredEpisodes: [],
     season: 'all',
-    series: []
+    series: [],
+    isLoading: true
     
   };
   
@@ -17,6 +18,7 @@ const initialState = {
         return {
           ...state,
           episodes: action.payload,
+          isLoading: false
         };
   
       case RANDOM_EPISODE:

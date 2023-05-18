@@ -1,21 +1,23 @@
+import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { Provider, useDispatch} from 'react-redux'
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import Store from './Redux/store.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { EpisodesList } from './screens/EpisodesList.js';
 import { Home } from './screens/Home.js';
 import { getEpisodes, getEpisodesCache } from './Redux/actions.js';
-import { useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LoadingScreen } from './components/LoadingScreen.js';
 
+const Stack = createStackNavigator();
 
+const MyStack = () => {
+  const dispatch = useDispatch();
 
-const Stack = createStackNavigator()
+  const isLoading = useSelector(state => state.isLoading);
 
-const MyStack= () => {
-  const dispatch = useDispatch()
   useEffect(() => {
     const checkLocalStorage = async () => {
       try {
@@ -29,33 +31,29 @@ const MyStack= () => {
         console.log(error);
       }
     };
-  
+
     checkLocalStorage();
-  }, []);;
+  }, []);
 
-
-
-
-  return(
-
-<Stack.Navigator>
-<Stack.Screen name="Home" component={Home} />
-<Stack.Screen name="Episode" component={EpisodesList} />
-</Stack.Navigator>
-)
-  
-}
-
-export default function App() {
-
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Episode" component={EpisodesList} />
+    </Stack.Navigator>
+  );
+};
+
+export default function App() {
+  return (
     <Provider store={Store}>
-   <NavigationContainer>
-<MyStack/>
-   </NavigationContainer>
-  </Provider>
-  
+      <NavigationContainer>
+        <MyStack />
+      </NavigationContainer>
+    </Provider>
   );
 }
 
