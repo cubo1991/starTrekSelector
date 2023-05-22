@@ -16,7 +16,7 @@ const Stack = createStackNavigator();
 const MyStack = () => {
   const dispatch = useDispatch();
 
-  const isLoading = useSelector(state => state.isLoading);
+  const isLoading = useSelector((state) => state.isLoading);
 
   useEffect(() => {
     const checkLocalStorage = async () => {
@@ -39,6 +39,7 @@ const MyStack = () => {
     return <LoadingScreen />;
   }
 
+  // Renderizar el contenido de la aplicación
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={Home} />

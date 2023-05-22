@@ -1,6 +1,6 @@
  
 
-import { EPISODE_SEASON, GET_EPISODES, GET_EPISODES_CACHE, RANDOM_EPISODE } from "./constantes";
+import { EPISODE_SEASON, GET_EPISODES, GET_EPISODES_CACHE, RANDOM_EPISODE, SET_LOADING } from "./constantes";
 
 const initialState = {
     episodes: [],
@@ -17,7 +17,8 @@ const initialState = {
       case GET_EPISODES:
         return {
           ...state,
-          episodes: action.payload,
+          episodes: action.payload[0],
+          series:action.payload[1],
           isLoading: false
         };
   
@@ -32,7 +33,8 @@ const initialState = {
         return{
             ...state,
             episodes: action.payload,
-            series: action.series
+            series: action.series,
+            isLoading: false
         }
     case EPISODE_SEASON:
           let id = action.payload
@@ -52,11 +54,18 @@ const initialState = {
             season: action.payload,
             filteredEpisodes: seasonEpisodes
           };
+          case SET_LOADING:
+            return{
+              ...state,
+              isLoading: action.payload
+            }
   
       default:
         return state;
     }
   };
+
+
   
   export default rootReducer;
   

@@ -13,16 +13,16 @@ export const EpisodesList = () => {
   let season = useSelector((state) => state.season);
   let series = useSelector((state) => state.series);
   const [episode, setEpisode] = useState(null);
-  const [infoSerie, setinfoSerie] = useState(null);
-  
+  const [infoSerie, setInfoSerie] = useState(null);
 
   useEffect(() => {
     let chooseSerie;
     if (episode) {
-      series[2].Title = 'Star Trek: The Original Series';
+      if (series[2]) {
+        series[2].Title = 'Star Trek: The Original Series';
+      }
       chooseSerie = series.find((e) => e.Title === episode.series.title);
-      setinfoSerie(chooseSerie);
-      
+      setInfoSerie(chooseSerie);
     }
   }, [episode, series]);
 
@@ -44,7 +44,7 @@ export const EpisodesList = () => {
   }
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <ScrollView>
         <SeasonSelect />
         {episode ? (
@@ -55,13 +55,14 @@ export const EpisodesList = () => {
             series={episode.series.title}
             season={episode.season.title}
             photo={infoSerie?.Poster}
-            
           />
         ) : (
           <Text>Press to boldly go where no one has gone before</Text>
         )}
-        <Button title="Engage" onPress={() => episodeRandom()}></Button>
       </ScrollView>
+      <View style={{ width: '100%', paddingHorizontal: 20, marginBottom: 20 }}>
+        <Button title="Engage" onPress={() => episodeRandom()} />
+      </View>
     </View>
   );
 };

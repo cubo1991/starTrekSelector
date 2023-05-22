@@ -1,6 +1,6 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { EPISODE_SEASON, GET_EPISODES, GET_EPISODES_CACHE, RANDOM_EPISODE } from './constantes';
+import { EPISODE_SEASON, GET_EPISODES, GET_EPISODES_CACHE, RANDOM_EPISODE, SET_LOADING } from './constantes';
 
 import {API_KEY} from "@env"
 
@@ -62,10 +62,11 @@ export const getEpisodes = () => {
       
       
       let showEpisodes = await loadList()
+      let showSeries = await loadSeries() 
      
       dispatch({
         type: GET_EPISODES,
-        payload: showEpisodes,
+        payload: [showEpisodes, showSeries],
       });
     } catch (error) {
       dispatch({
@@ -89,14 +90,17 @@ export const getEpisodes = () => {
   export const getEpisodesCache = () => {
     return async (dispatch) => {
       try {
-       let showEpisodes = await loadList()
-       let seriesInfo = await loadSeries()
-
-       
+        let showEpisodes = await loadList();
+        let seriesInfo = await loadSeries();
+  
+        if (showEpisodes !== null && showEpisodes.length > 0) {
+          dispatch(setLoading(false)); // Detiene el loading si la lista no está vacía
+        }
+  
         dispatch({
           type: GET_EPISODES_CACHE,
           payload: showEpisodes,
-          series: seriesInfo
+          series: seriesInfo,
         });
       } catch (error) {
         dispatch({
@@ -105,8 +109,8 @@ export const getEpisodes = () => {
         });
       }
     };
-
-  }
+  };
+  
   
   export const episodeSeason = (payload) => {
  
@@ -116,6 +120,14 @@ export const getEpisodes = () => {
       payload
     }
 
+  }
+
+  export const setLoading = (payload) => {
+
+    return {
+      type: SET_LOADING,
+      payload
+    }
   }
 
 
