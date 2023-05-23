@@ -42,7 +42,7 @@ const MyStack = () => {
   // Renderizar el contenido de la aplicación
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Star Trek Selector" component={Home} />
       <Stack.Screen name="Episode" component={EpisodesList} />
     </Stack.Navigator>
   );

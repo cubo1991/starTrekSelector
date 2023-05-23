@@ -47,7 +47,7 @@ const initialState = {
           seasonEpisodes = toFilter.filter(episode => episode.series.uid === id )} else{
             seasonEpisodes = state.episodes
           }
-          console.log(seasonEpisodes);
+        
              
           return {
             ...state,

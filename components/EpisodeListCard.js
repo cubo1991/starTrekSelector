@@ -1,8 +1,25 @@
-import React from 'react';
-import { Button, ScrollView, Text, View, Image, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text, View, Image, StyleSheet } from 'react-native';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 
 export const EpisodeListCard = ({ episodeNumber, title, airDate, series, season, photo }) => {
-  console.log(photo);
+  const [loaded] = useFonts({
+    StarNext: require('../assets/fonts/StarNext.otf'),
+  });
+
+  useEffect(() => {
+    async function prepare() {
+      await SplashScreen.preventAutoHideAsync();
+    }
+    prepare();
+  }, []);
+
+  if (!loaded) {
+    return null;
+  } else {
+    SplashScreen.hideAsync();
+  }
 
   return (
     <View style={styles.container}>
@@ -11,7 +28,6 @@ export const EpisodeListCard = ({ episodeNumber, title, airDate, series, season,
       <Text style={styles.episode}>Season {season} Episode {episodeNumber}</Text>
       <Text style={styles.airDate}>Air date: {airDate}</Text>
       <Image source={{ uri: photo }} style={styles.image} />
-      <Text></Text>
     </View>
   );
 };
@@ -26,10 +42,9 @@ const styles = StyleSheet.create({
   },
   series: {
     fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 8,
+     marginBottom: 8,
     overflow: 'hidden',
-    textOverflow: 'ellipsis',
+    fontFamily: 'StarNext',
   },
   title: {
     fontSize: 14,
