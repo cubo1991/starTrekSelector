@@ -44,7 +44,7 @@ export const EpisodesList = () => {
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor:'#000000' }}>
       <ScrollView>
         <SeasonSelect />
         {episode ? (
@@ -60,7 +60,7 @@ export const EpisodesList = () => {
           <Text>Press to boldly go where no one has gone before</Text>
         )}
       </ScrollView>
-      <View style={{ width: '100%', paddingHorizontal: 20, marginBottom: 20 }}>
+      <View style={{ width: '100%', paddingHorizontal: 20, marginBottom: 20, backgroundColor: '#000000' }}>
         <Button title="Engage" onPress={() => episodeRandom()} />
       </View>
     </View>

@@ -2,21 +2,33 @@ import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider, useDispatch, useSelector } from 'react-redux';
-import Store from './Redux/store.js';
+import Store from './Redux/store';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { EpisodesList } from './screens/EpisodesList.js';
-import { Home } from './screens/Home.js';
-import { getEpisodes, getEpisodesCache } from './Redux/actions.js';
+import { EpisodesList } from './screens/EpisodesList';
+import { Home } from './screens/Home';
+import { getEpisodes, getEpisodesCache } from './Redux/actions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { LoadingScreen } from './components/LoadingScreen.js';
+import { LoadingScreen } from './components/LoadingScreen';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 
 const Stack = createStackNavigator();
 
 const MyStack = () => {
   const dispatch = useDispatch();
-
   const isLoading = useSelector((state) => state.isLoading);
+  
+  const [loaded] = useFonts({
+    StarNext: require('./assets/fonts/StarNext.otf'),
+  });
+
+  useEffect(() => {
+    async function prepare() {
+      await SplashScreen.preventAutoHideAsync();
+    }
+    prepare();
+  }, []);
 
   useEffect(() => {
     const checkLocalStorage = async () => {
@@ -35,15 +47,48 @@ const MyStack = () => {
     checkLocalStorage();
   }, []);
 
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
+
+  if (!loaded) {
+    return null;
+  }
+
   if (isLoading) {
     return <LoadingScreen />;
   }
 
-  // Renderizar el contenido de la aplicación
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Star Trek Selector" component={Home} />
-      <Stack.Screen name="Episode" component={EpisodesList} />
+      <Stack.Screen
+        name="Star Trek Selector"
+        component={Home}
+        options={{
+          headerStyle: {
+            backgroundColor: '#000000', // Cambia el color de fondo del encabezado
+          },
+          headerTitleStyle: {
+            color: '#0047AB',
+            fontFamily: 'StarNext', // Cambia el color del título del encabezado
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Episode"
+        component={EpisodesList}
+        options={{
+          headerStyle: {
+            backgroundColor: '#000000', // Cambia el color de fondo del encabezado
+          },
+          headerTitleStyle: {
+            color: '#0047AB',
+            fontFamily: 'StarNext', // Cambia el color del título del encabezado
+          },
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -61,7 +106,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#000000',
     alignItems: 'center',
     justifyContent: 'center',
   },

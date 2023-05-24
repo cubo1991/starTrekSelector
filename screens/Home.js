@@ -7,7 +7,7 @@ export const Home = (props) => {
 
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor:'#000000' }}>
    
       <Button
         style={{ fontFamily: 'StarNext', fontSize: 24 }}

@@ -34,7 +34,7 @@ export const EpisodeListCard = ({ episodeNumber, title, airDate, series, season,
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#000000',
     padding: 16,
     marginBottom: 16,
     borderRadius: 8,
@@ -45,18 +45,22 @@ const styles = StyleSheet.create({
      marginBottom: 8,
     overflow: 'hidden',
     fontFamily: 'StarNext',
+    color:'#0047AB'
   },
   title: {
     fontSize: 14,
     marginBottom: 8,
+    color:'#0047AB'
   },
   episode: {
     fontSize: 14,
     marginBottom: 8,
+    color:'#0047AB'
   },
   airDate: {
     fontSize: 14,
     marginBottom: 8,
+    color:'#0047AB'
   },
   image: {
     width: '100%',
