@@ -15,6 +15,7 @@ useEffect(() => {
   return (
  <Picker
   selectedValue={selectedSeason}  
+  dropdownIconColor='#0047AB'
 style={{backgroundColor: 'black', borderColor: '#0047AB', color:'#0047AB'}}
   onValueChange={(itemValue, itemIndex) =>
    [ setselectedSeason(itemValue),
